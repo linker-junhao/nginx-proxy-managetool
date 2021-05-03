@@ -75,6 +75,12 @@ export default defineComponent({
       axios.post('/base-config', this.serverConfigList).then((res) => {
         console.log(res);
       });
+    },
+    switchConfig(idx) {
+      this.activeIdx = -1
+      this.$nextTick(_ => {
+        this.activeIdx = idx
+      })
     }
   },
   render() {
@@ -98,7 +104,7 @@ export default defineComponent({
           <Checkbox.Group class="w-full" v-model={[this.selectedServers, 'value']}>
             {
               this.serverConfigList.map((server, idx) => (
-                <div key={idx} onClick={() => { this.activeIdx = idx }}
+                <div key={idx} onClick={() => this.switchConfig(idx)}
                   class="relative pl-6 flex justify-between items-center px-2 py-2 bg-white border-b border-gray-300 cursor-pointer hover:bg-gray-100">
                   <Checkbox value={idx} class="absolute left-1"/>
                   <ServerListItem itemData={server} />
