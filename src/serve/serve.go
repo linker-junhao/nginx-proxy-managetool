@@ -11,7 +11,7 @@ import (
 )
 
 const configFilePath string = "./config.json"
-var nginxConfPath *string = flag.String("c", "/usr/local/etc/nginx/ngin.conf", "nginx config file path")
+var nginxConfPath *string = flag.String("c", "/usr/local/etc/nginx/nginx-pmt.conf", "nginx config file path")
 var servePort *string = flag.String("p", "8999", "serve listen port")
 
 func read(file io.Reader, len int) ([]byte) {
