@@ -4,7 +4,7 @@ import { Button, Checkbox, message } from 'ant-design-vue';
 import ServerListItem, { ServerData } from './ServerListItem';
 import ServerConfigEdit from './ServerConfigEdit';
 
-axios.defaults.baseURL = '/api';
+axios.defaults.baseURL = 'http://localhost:9000/api';
 export const genServerConfig = () => ({
   name: '未命名server配置',
   serverName: 'dev.example.com',
@@ -64,6 +64,9 @@ export default defineComponent({
         if (this.detectDumplicateApply(selected)) {
           axios.post('/use-config', selected).then((res) => {
             console.log(res.data);
+            message.error('操作成功');
+          }).catch(err => {
+            message.error(err);
           });
         }
       } else {
@@ -74,6 +77,9 @@ export default defineComponent({
       console.log(this.serverConfigList);
       axios.post('/base-config', this.serverConfigList).then((res) => {
         console.log(res);
+        message.success('操作成功');
+      }).catch(err => {
+        message.error(err);
       });
     },
     switchConfig(idx) {
@@ -108,7 +114,10 @@ export default defineComponent({
                   class="relative pl-6 flex justify-between items-center px-2 py-2 bg-white border-b border-gray-300 cursor-pointer hover:bg-gray-100">
                   <Checkbox value={idx} class="absolute left-1"/>
                   <ServerListItem itemData={server} />
-                  <Button type="danger" size="small" shape="circle" onClick={withModifiers(() => this.serverConfigList.splice(idx, 1), ['stop'])}>😵</Button>
+                  <Button type="danger" size="small" shape="circle" onClick={withModifiers(() => {
+                    this.serverConfigList.splice(idx, 1)
+                    this.saveServesConfig()
+                  }, ['stop'])}>😵</Button>
                 </div>
               ))
             }

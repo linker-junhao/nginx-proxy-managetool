@@ -1,1 +1,1 @@
-[{"name":"未命名teste","serverName":"dev.boss.xtadmins.com","listen":"80","locations":[{"name":"ff","location":"^~/crm","proxyPass":"http://bosswebserv"},{"name":"fr","location":"^~ /boss","proxyPass":"http://bosswebserv"}]}]
+[]

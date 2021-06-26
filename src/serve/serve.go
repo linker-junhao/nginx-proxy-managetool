@@ -162,13 +162,15 @@ http {
   }
 }
 
-func reloadNginx () {
+func reloadNginx () (error) {
   cmd := exec.Command("sudo", "nginx", "-c", *nginxConfPath, "-s", "reload")
   out, err := cmd.CombinedOutput()
   if err != nil {
 		log.Println("cmd.Run() failed with", err)
+    return err
 	}
 	log.Println("combined out:", string(out))
+  return nil
 }
 
 func Run() {
@@ -193,8 +195,13 @@ func Run() {
         config := read(r.Body, 10000)
         genNginxConfFile(config)
         content, _ := readFileLinesN(*nginxConfPath, 10000)
-        reloadNginx()
-        rw.Write([]byte(content))
+        err := reloadNginx()
+        if(err != nil) {
+          rw.WriteHeader(http.StatusServiceUnavailable)
+          rw.Write([]byte(err.Error()))
+        } else {
+          rw.Write([]byte(content))
+        }
       }
     }
   })
