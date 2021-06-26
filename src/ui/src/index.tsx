@@ -4,7 +4,7 @@ import { Button, Checkbox, message } from 'ant-design-vue';
 import ServerListItem, { ServerData } from './ServerListItem';
 import ServerConfigEdit from './ServerConfigEdit';
 
-axios.defaults.baseURL = 'http://localhost:9000/api';
+axios.defaults.baseURL = '/api';
 export const genServerConfig = () => ({
   name: '未命名server配置',
   serverName: 'dev.example.com',
