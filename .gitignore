@@ -3,3 +3,4 @@
 /build
 /src/ui/node_modules
 /dist
+/.vscode
