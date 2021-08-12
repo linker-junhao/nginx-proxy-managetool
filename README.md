@@ -9,7 +9,11 @@
 * dev启动：`vite`
 * build: `vite build`
 
-### 访问
-* 启动: `sudo ./main -p=8999`
-* ui: `http://localhost:8999/ui`
-* api: `http://localhost:8999/api`
+### 访问地址
+* ui的地址: `http://localhost:8999/ui`
+* api的地址: `http://localhost:8999/api`
+### 使用
+* 打包: `sh ./build.sh`
+* 启动: 到dist目录下，`sudo ./main -p=8999`
+* 首次使用，在ui界面上选中一个配置项后点击应用，这是为了生成`nginx-pmt.conf`配置文件。然后使用命令`sudo nginx -c /usr/local/etc/nginx/nginx-pmt.conf`启动nginx。
+* 后续就可以直接使用ui界面控制配置了。
